@@ -1,0 +1,23 @@
+name: Multi-Event Workflow
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+  schedule:
+    - cron: '*/10 * * * *'
+
+jobs:
+  triggered_by:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine Trigger
+        run: |
+          if [ "${{ github.event_name }}" == "push" ]; then
+            echo "Le job a été déclenché par un événement de type push"
+          elif [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "Le job a été déclenché par un événement de type workflow_dispatch"
+          elif [ "${{ github.event_name }}" == "schedule" ]; then
+            echo "Le job a été déclenché par un événement de type schedule"
+          fi
