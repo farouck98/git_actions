@@ -1,0 +1,15 @@
+name: Checkout Workflow
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Display README.md
+        run: cat README.md
